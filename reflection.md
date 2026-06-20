@@ -50,6 +50,15 @@ for hard mode (answer:12), guessed 12.5  Go lower            Correct answer    N
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
+I used Claude as my AI tool for this project. So when I fixed the bug of making the number ranges correct for level of difficulty, I changed it so that:
+- Easy mode was from 1 to 20 numbers.
+- Normal mode was from 1 to 50 numbers.
+- Hard mode was from 1 to 100 numbers.
+
+Good suggestion that Claude then made was, after these ranges were fixed, for the instructions to change them so that it displayed the high and low number range. Instead of just statically displaying "Guess a number from 1 to 100", it would display "Guess a number from {low} to {high}". I did listen to that suggestion because it was one of the errors that I had documented previously, and it makes the instructions clear for the user. If we were to statically keep the directions that said "guess the number from one to 100", that would have been inaccurate instructions and would have confused the user when they were trying to guess the number if they were in easy or normal mode. I verified that the results were correct by relaunching the Streamlit app to make sure, and tried with my own guesses and looked at the interface to make sure that everything was working correctly. 
+
+One misleading thing that claude did was when I was specifically working on the bug for fixing the ranges of the numbers for the different modes.Claude then decided to also run some other tests that were part of the bug about the system incorrectly displaying whether the number should be higher or lower (a bug unrelated to what we were working on). I then basically told Claude to only focus on the test cases that were related to the bug we were trying to solve. I told it to not pay attention to the other bugs of the app currently so we could focus on the problem at hand. Then also took those tests and ran them myself to make sure that they were specific to the bug related to the ranges of the numbers. I made sure to disregard the other tests that Claude was running. 
+
 ---
 
 ## 3. Debugging and testing your fixes

@@ -1,15 +1,8 @@
 import random
 import streamlit as st
 
-def get_range_for_difficulty(difficulty: str):
-    if difficulty == "Easy":
-        return 1, 20
-    if difficulty == "Normal":
-        return 1, 100
-    if difficulty == "Hard":
-        return 1, 50
-    return 1, 100
-
+from logic_utils import get_range_for_difficulty
+#FIX: Fixed the ranges for difficulty levels. Easy is now 1-20, Normal is 1-50, and Hard is 1-100. This was done to create a more balanced game experience, as the previous ranges were too narrow for the intended difficulty levels. 
 
 def parse_guess(raw: str):
     if raw is None:
@@ -54,6 +47,7 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
             points = 10
         return current_score + points
 
+#FIXME: This logic is intentionally inconsistent to create a "glitchy" game experience. Should not have an increase in score when outcome is "Too High" on even attempts, but it does. This is part of the intended game design to make it feel like something is off.
     if outcome == "Too High":
         if attempt_number % 2 == 0:
             return current_score + 5
@@ -106,8 +100,9 @@ if "history" not in st.session_state:
 
 st.subheader("Make a guess")
 
+#FIX: Added a display of the current range and attempts left to guide the player, as this information is crucial for making informed guesses. This was missing in the original code, which could lead to confusion about the game's parameters.
 st.info(
-    f"Guess a number between 1 and 100. "
+    f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
